@@ -2,31 +2,43 @@
 //www.apluscompsci.com
 //Name -
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import javax.imageio.ImageIO;
 
 public class Ship extends MovingThing
 {
 	private int speed;
-	private Image image;
+	private BufferedImage image;
 
 	public Ship()
 	{
 		this(10,10,10,10,10);
 	}
 
-	public Ship(int x, int y)
-	{
-	   //add code here
+	public Ship(int x, int y) {
+	   super(x, y);
+	   speed = 5;
+	   try {
+		   image = ImageIO.read(new File("ship.jpg"));
+	   } catch (Exception e) {
+		   System.out.println("File not in path");
+	   }
 	}
 
 	public Ship(int x, int y, int s)
 	{
-	   //add code here
+	   super(x, y);
+	   speed = s;
+		try {
+			image = ImageIO.read(new File("ship.jpg"));
+		} catch (Exception e) {
+			System.out.println("File not in path");
+		}
 	}
 
 	public Ship(int x, int y, int w, int h, int s)
@@ -40,29 +52,31 @@ public class Ship extends MovingThing
 		}
 		catch(Exception e)
 		{
-			//feel free to do something here
+			System.out.println("File not in path");
 		}
 	}
 
 
 	public void setSpeed(int s)
 	{
-	   //add more code
+	   speed = s;
 	}
 
 	public int getSpeed()
 	{
-	   return 0;
+	   return speed;
 	}
 
 	public void move(String direction)
 	{
-		//add code here
+		if (direction.equals("LEFT"))
+			setX(getX()-5);
+		//finsih this
 	}
 
 	public void draw( Graphics window )
 	{
-   	window.drawImage(image,getX(),getY(),getWidth(),getHeight(),null);
+   		window.drawImage(image,getX(),getY(),getWidth(),getHeight(),null);
 	}
 
 	public String toString()

@@ -87,6 +87,6 @@ public abstract class MovingThing implements Moveable
 
 	public String toString()
 	{
-		return "xPos = " + getX() + "yPos = " + getY() + "Width = " + getWidth() + "Height = " + getHeight();
+		return "xPos = " + getX() + ", yPos = " + getY() + ", Width = " + getWidth() + ", Height = " + getHeight();
 	}
 }

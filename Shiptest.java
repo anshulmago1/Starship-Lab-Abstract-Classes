@@ -8,7 +8,7 @@ import static java.lang.System.*;
 
 public class Shiptest
 {
-    public static void main( String args[] )
+    public static void main( String args[] ) throws IOException
     {
         MovingThing test = new Ship();
         System.out.println("Ship 1 " + test);
