@@ -47,11 +47,12 @@ public class Ship extends MovingThing
 		speed=s;
 		try
 		{
-			URL url = getClass().getResource("/images/ship.jpg");
+			URL url = getClass().getResource("ship.jpg");
 			image = ImageIO.read(url);
 		}
 		catch(Exception e)
 		{
+			System.out.println();
 			System.out.println("File not in path");
 		}
 	}
@@ -71,7 +72,13 @@ public class Ship extends MovingThing
 	{
 		if (direction.equals("LEFT"))
 			setX(getX()-5);
-		//finsih this
+		else if (direction.equals("RIGHT")) {
+			setX(getX()+5);
+		} else if (direction.equals("UP")) {
+			setY(getY()-5);
+		} else if (direction.equals("DOWN")) {
+			setY(getY()+5);
+		}
 	}
 
 	public void draw( Graphics window )
