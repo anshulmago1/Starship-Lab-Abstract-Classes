@@ -43,6 +43,7 @@ public class Alien extends MovingThing
 		catch(Exception e)
 		{
 			//feel free to do something here
+			System.out.println("Alien.java: incorrect image path");
 		}
 	}
 
@@ -54,12 +55,21 @@ public class Alien extends MovingThing
 
 	public int getSpeed()
 	{
-	   return 0;
+	   return speed;
 	}
 
    public void move(String direction)
 	{
 	   //add code here
+		if (direction.equals("LEFT"))
+			setX(getX()-speed);
+		else if (direction.equals("RIGHT")) {
+			setX(getX()+speed);
+		} else if (direction.equals("UP")) {
+			setY(getY()-speed);
+		} else if (direction.equals("DOWN")) {
+			setY(getY()+speed);
+		}
 	}
 
 	public void draw( Graphics window )
@@ -69,6 +79,6 @@ public class Alien extends MovingThing
 
 	public String toString()
 	{
-		return "";
+		return super.toString() + "Speed: " + getSpeed();
 	}
 }

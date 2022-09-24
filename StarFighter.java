@@ -1,11 +1,10 @@
 import javax.swing.JFrame;
-import java.awt.Component;
-import java.awt.Graphics;
+import java.awt.*;
 
 public class StarFighter extends JFrame
 {
-	public static int WIDTH = 800;
-	public static int HEIGHT = 600;
+	public static int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	public static int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
 	public StarFighter()
 	{
