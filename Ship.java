@@ -71,13 +71,13 @@ public class Ship extends MovingThing
 	public void move(String direction)
 	{
 		if (direction.equals("LEFT"))
-			setX(getX()-5);
+			setX(getX()-speed);
 		else if (direction.equals("RIGHT")) {
-			setX(getX()+5);
+			setX(getX()+speed);
 		} else if (direction.equals("UP")) {
-			setY(getY()-5);
+			setY(getY()-speed);
 		} else if (direction.equals("DOWN")) {
-			setY(getY()+5);
+			setY(getY()+speed);
 		}
 	}
 
@@ -88,6 +88,6 @@ public class Ship extends MovingThing
 
 	public String toString()
 	{
-		return super.toString() + getSpeed();
+		return super.toString() + "Speed: " + getSpeed();
 	}
 }
