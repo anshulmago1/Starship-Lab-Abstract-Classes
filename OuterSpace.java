@@ -24,6 +24,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
    	private AlienHorde horde;
 	private Bullets shots;
 
+	private boolean shotShot;
 	private boolean[] keys;
 	private BufferedImage back;
 
@@ -38,6 +39,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		ship = new Ship(500, 200, 100, 80, 2);
 		alienOne = new Alien(250, 100, 2);
 		alienTwo = new Alien(400, 100, 2);
+		shots = new Bullets();
+		shotShot = false;
 
 		this.addKeyListener(this);
 		new Thread(this).start();
@@ -69,33 +72,25 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.fillRect(0,0,StarFighter.WIDTH,StarFighter.HEIGHT);
 
-		if(keys[0] == true)
-		{
-			ship.move("LEFT");
-		} else if (keys[1]==true) {
-			ship.move("RIGHT");
-		} else if (keys[2]==true) {
-			ship.move("UP");
-		} else if (keys[3]==true) {
-			ship.move("DOWN");
-		}
-
 		//add code to move Ship, Alien, etc.
 		if (keys[0] == true) {
 			ship.move("LEFT");
-		}
-		else if (keys[1] == true) {
+		} else if (keys[1] == true) {
 			ship.move("RIGHT");
-		}
-		else if (keys[2] == true) {
+		} else if (keys[2] == true) {
 			ship.move("UP");
 		} else if (keys[3] == true) {
 			ship.move("DOWN");
+		} if (keys[4] == true && shotShot) {
+			shots.add(new Ammo(ship.getX(), ship.getY(), 10));
+			shotShot=false;
 		}
+
+		shots.moveEmAll();
 		ship.draw ( graphToBack ) ;
 		alienOne.draw ( graphToBack ) ;
 		alienTwo.draw ( graphToBack ) ;
-
+		shots.drawEmAll( graphToBack );
 
 		//add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship
 
@@ -150,6 +145,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		if (e.getKeyCode() == KeyEvent.VK_SPACE)
 		{
 			keys[4] = false;
+			shotShot = true;
 		}
 		repaint();
 	}

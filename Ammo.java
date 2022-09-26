@@ -28,16 +28,6 @@ public class Ammo extends MovingThing
 	{
 		super(x, y);
 		speed = s;
-		try
-		{
-			URL url = getClass().getResource("ammo.jpg");
-			image = ImageIO.read(url);
-		}
-		catch(Exception e)
-		{
-			//feel free to do something here
-			System.out.println("Alien.java: incorrect image path");
-		}
 	}
 
 	public void setSpeed(int s)
@@ -53,7 +43,7 @@ public class Ammo extends MovingThing
 	public void draw( Graphics window )
 	{
 		window.setColor(Color.yellow);
-		window.fillRect(getX()-5, getY()-5, 10, 10);
+		window.fillRect(getX()+45, getY()+10, 10, 10);
 	}
 	
 	
@@ -64,10 +54,6 @@ public class Ammo extends MovingThing
             setY(getY() - speed);
         }else if(direction.equals("DOWN")){
             setY(getY() + speed);
-        }else if(direction.equals("LEFT")){
-            setX(getX() - speed);
-        }else if(direction.equals("RIGHT")){
-            setX(getX() + speed);
         }
 	}
 
