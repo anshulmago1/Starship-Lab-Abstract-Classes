@@ -2,6 +2,7 @@
 //www.apluscompsci.com
 //Name -
 
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,7 +20,6 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private Ship ship;
 	private Alien alienOne;
 	private Alien alienTwo;
-
 	
    	private AlienHorde horde;
 	private Bullets shots;
@@ -36,9 +36,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		//instantiate other instance variables
 		//Ship, Alien
-		ship = new Ship(500, 200, 100, 80, 2);
-		alienOne = new Alien(250, 100, 2);
-		alienTwo = new Alien(400, 100, 2);
+		ship = new Ship(500, 200, 100, 80, 7);
+		//alienOne = new Alien(250, 100, 2);
+		//alienTwo = new Alien(400, 100, 2);
+		horde = new AlienHorde(10);
+		for (int i=0; i<10; i++) {
+			horde.add(new Alien(ship.getWidth() + i* ship.getWidth(), 50,ship.getWidth()*3/4,ship.getWidth()*3/4, 1));
+		}
 		shots = new Bullets();
 		shotShot = false;
 
@@ -82,18 +86,21 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		} else if (keys[3] == true) {
 			ship.move("DOWN");
 		} if (keys[4] == true && shotShot) {
-			shots.add(new Ammo(ship.getX(), ship.getY(), 10));
+			shots.add(new Ammo(ship.getX()+45, ship.getY()+10, 10));
 			shotShot=false;
 		}
 
 		shots.moveEmAll();
+		horde.moveEmAll();
+
 		ship.draw ( graphToBack ) ;
-		alienOne.draw ( graphToBack ) ;
-		alienTwo.draw ( graphToBack ) ;
+		horde.drawEmAll( graphToBack );
+		//alienOne.draw ( graphToBack ) ;
+		//alienTwo.draw ( graphToBack ) ;
 		shots.drawEmAll( graphToBack );
 
 		//add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship
-
+		horde.removeDeadOnes(shots.getList());
 
 		twoDGraph.drawImage(back, null, 0, 0);
 	}
@@ -161,7 +168,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
    	{
    		while(true)
    		{
-   		   Thread.currentThread().sleep(5);
+   		   Thread.currentThread().sleep(10);
             repaint();
          }
       }catch(Exception e)
